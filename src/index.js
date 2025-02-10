@@ -29,27 +29,31 @@ const reviews = [
 const renderItem = (todoData) => {
   const li = document.createElement("li");
 
-  const pName = document.createElement('p');
+  const pName = document.createElement("p");
   pName.textContent = todoData.username;
-  console.log(pName.textContent)
+  console.log(pName.textContent);
 
-  const img = document.createElement('img')
-  img.textContent = todoData.image
-  console.log(img.textContent)
+  const img = document.createElement("img");
+  img.textContent = todoData.image;
+  console.log(img.textContent);
 
-  const star = document.createElement('p')
-  star.textContent = todoData.star
-  console.log(star.textContent) 
+  const star = document.createElement("p");
+  star.textContent = todoData.star;
+  console.log(star.textContent);
 
-  const review = document.createElement('p')
-  review.textContent = todoData.review
-  console.log(review.textContent)
+  const review = document.createElement("p");
+  review.textContent = todoData.review;
+  console.log(review.textContent);
 
-  li.append(pName, img, star, review);
-  return li; 
+  li.append(img, pName,  star, review);
+  return li;
 };
 
-renderItem(reviews[0]);
+const liArray = reviews.map((todoItem) => renderItem(todoItem));
 
-document.querySelector(".review_container").append(renderItem(reviews[0]));
+const container = document.querySelector(".review_container");
+
+liArray.forEach((li) => {
+  container.append(li);
+});
 //2. Append new reviews to the DOM from the form
