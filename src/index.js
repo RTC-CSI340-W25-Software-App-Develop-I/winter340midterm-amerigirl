@@ -26,4 +26,30 @@ const reviews = [
 
 //1. Append the reviews to the DOM
 
+const renderItem = (todoData) => {
+  const li = document.createElement("li");
+
+  const pName = document.createElement('p');
+  pName.textContent = todoData.username;
+  console.log(pName.textContent)
+
+  const img = document.createElement('img')
+  img.textContent = todoData.image
+  console.log(img.textContent)
+
+  const star = document.createElement('p')
+  star.textContent = todoData.star
+  console.log(star.textContent) 
+
+  const review = document.createElement('p')
+  review.textContent = todoData.review
+  console.log(review.textContent)
+
+  li.append(pName, img, star, review);
+  return li; 
+};
+
+renderItem(reviews[0]);
+
+document.querySelector(".review_container").append(renderItem(reviews[0]));
 //2. Append new reviews to the DOM from the form
