@@ -25,35 +25,74 @@ const reviews = [
 /////////////////////////////////////////////////////////////////////
 
 //1. Append the reviews to the DOM
+//render 1 review
+const renderReview = (review) => {
+  //create the container
+  const container = document.querySelector(".reviews");
 
-const renderItem = (todoData) => {
-  const li = document.createElement("li");
+  //create main div and give it a class
+  const mainDiv = document.createElement("div");
+  mainDiv.className = "review_container";
 
-  const pName = document.createElement("p");
-  pName.textContent = todoData.username;
-  console.log(pName.textContent);
-
+  //create the image
   const img = document.createElement("img");
-  img.textContent = todoData.image;
-  console.log(img.textContent);
+  img.src = review.image;
+
+  //add img to container
+  mainDiv.append(img);
+  container.append(mainDiv);
+
+  //create the div that will hold elements
+
+  const div = document.createElement("div");
+  mainDiv.append(div);
+
+  //add elements to the div
+  const pName = document.createElement("p");
+  pName.textContent = review.username;
+  div.append(pName);
 
   const star = document.createElement("p");
-  star.textContent = todoData.star;
-  console.log(star.textContent);
+  star.textContent = review.star;
+  div.append(star);
 
-  const review = document.createElement("p");
-  review.textContent = todoData.review;
-  console.log(review.textContent);
-
-  li.append(img, pName,  star, review);
-  return li;
+  const actualReview = document.createElement("p");
+  actualReview.textContent = review.review;
+  div.append(actualReview);
 };
 
-const liArray = reviews.map((todoItem) => renderItem(todoItem));
+//render all reviews
+const renderReviews = (reviews) => {
+  reviews.forEach(renderReview);
+};
 
-const container = document.querySelector(".review_container");
+renderReviews(reviews);
 
-liArray.forEach((li) => {
-  container.append(li);
-});
 //2. Append new reviews to the DOM from the form
+
+//handle form submit
+const handleFormSubmit = (e) => {
+  e.preventDefault();
+
+  const pName = e.target.username.value;
+  const img = e.target.image.value;
+  const star = e.target.star.value;
+  const review = e.target.review.value;
+
+//create an object to hold the new review
+  const newReview = {
+    username: pName,
+    image: img,
+    star: star,
+    review: review,
+  };
+
+  renderReview(newReview);
+};
+
+
+  document.querySelector("form").addEventListener("submit", handleFormSubmit);
+
+  
+
+
